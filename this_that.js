@@ -4,7 +4,7 @@ var relationship1 = {
     logFriends : function(){
         var that = this
         this.friends.forEach(function(friend){
-            console.log(this.name, friend);
+            console.log(this, friend);
         })
     }
 }
