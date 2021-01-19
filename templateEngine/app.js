@@ -6,11 +6,13 @@ const dotenv = require('dotenv');
 const path = require('path');
 
 dotenv.config();
-const indexRouter = require('./index.js');
-const userRouter = require('./user.js');
+const indexRouter = require('./route');
+const userRouter = require('./route/user');
 
 const app = express();
 app.set('port', process.env.PORT || 3000);
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'pug')
 
 app.use(morgan('dev'));
 app.use('/', express.static(path.join(__dirname, 'public')));
