@@ -23,7 +23,9 @@ class Comment extends Sequelize.Model{
             collate:"utf8mb4_general_ci"
         })
     }
-    static associate(db){}
+    static associate(db){
+        db.Comment.belongsTo(db.User, {foreignKey:"commenter", targetKey:"id"}) // User.id를 target으로 하는 외래키 commenter 받아오기
+    }
 }
 
 module.exports = Comment

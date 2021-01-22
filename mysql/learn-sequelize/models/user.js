@@ -36,7 +36,9 @@ class User extends Sequelize.Model {
             collate:"utf8_general_ci"
         });
     }
-    static associate(db) {}
+    static associate(db) {
+        db.User.hasMany(db.Comment, {foreignKey:"commenter", sourceKey:"id"}) // id를 reference하는 외래키 commenter 생성
+    }
 }
 
 module.exports = User;
