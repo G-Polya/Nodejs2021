@@ -30,13 +30,14 @@ getUser = async ()=>{
             td = document.createElement("td")
             td.textContent = user.married ? "기혼":"미혼"
             row.appendChild(td)
+            
         })
     }catch(err){
         console.error(err)
     }
 }
 
-getComment = async(id){
+getComment = async(id)=>{
     try{
         const res = await axios.get(`/users/${id}/comments`)
         const comments = res.data
