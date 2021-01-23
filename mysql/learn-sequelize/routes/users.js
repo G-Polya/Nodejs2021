@@ -29,3 +29,22 @@ router.route("/")
             next(err)
         }
     })
+
+router.get("/:id/comments", async(req,res,next)=>{
+    try{
+        const comments = await Comment.findAll({
+            include:{
+                model:User,
+                where:{id:req.params.id}
+            }
+        })
+
+        console.log(comments)
+        res.json(comments)
+    }catch(err){
+        console.error(err)
+        next(err)
+    }
+})
+
+module.exports = router
