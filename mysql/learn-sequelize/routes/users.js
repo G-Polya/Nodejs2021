@@ -29,20 +29,35 @@ router.route('/')
     }
   });
 
-router.get('/:id/comments', async (req, res, next) => {
-  try {
-    const comments = await Comment.findAll({
-      include: {
-        model: User,
-        where: { id: req.params.id },
-      },
-    });
-    console.log(comments);
-    res.json(comments);
-  } catch (err) {
-    console.error(err);
-    next(err);
-  }
+router.get('/:id/comments', /*async*/(req, res, next) => {
+  Comment.findAll({
+    include:{
+      model:User,
+      where:{id:req.params.id}
+    }
+  })
+   .then((comments)=>{
+     console.log(comments)
+     res.json(comments)
+   })
+   .catch((err)=>{
+     console.error(err);
+     next(err)
+   })
+
+  // try {
+  //   const comments = await Comment.findAll({
+  //     include: {
+  //       model: User,
+  //       where: { id: req.params.id },
+  //     },
+  //   });
+  //   console.log(comments);
+  //   res.json(comments);
+  // } catch (err) {
+  //   console.error(err);
+  //   next(err);
+  // }
 });
 
 module.exports = router;
