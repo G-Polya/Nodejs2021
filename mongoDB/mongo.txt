@@ -1,0 +1,24 @@
+cd C:\Program Files\MongoDB\Server\4.4\bin
+mongod
+mongo 또는 mongo admin -u root -p 7760
+use nodejs
+db.createCollection("users")
+db.users.save({
+    name:"zero", 
+    age:24, 
+    married:false, 
+    comment:"안녕하세요, 간단히 몽고디비 사용방법에 대해 알아봅시다", 
+    createAt:new Date()
+})
+db.users.find({name:"zero"}, {_id:1})
+
+db.comments.save({commenter: ObjectId("600f6eebe39d9827c9689db0"), comment:"안녕하세요. zero의 댓글입니다", createAt:new Date()})
+
+db.users.find({$or:[{age:{$gt:30}},{married:false}]},{_id:0, name:1, age:1})
+
+
+db.users.find({}, {_id:0,name:true,age:true}).sort({age:-1}).limit(1)
+db.users.find({}, {_id:0,name:true,age:true}).sort({age:-1}).limit(1).skip(1)
+
+db.users.update({name:"nero}, {$set:{comment:"안녕하세요. 이 필드를 바꿔보겠습니다"}})
+db.users.remove({name:"nero"})
