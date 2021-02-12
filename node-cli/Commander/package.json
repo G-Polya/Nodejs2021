@@ -1,0 +1,13 @@
+{
+  "name": "commander",
+  "version": "1.0.0",
+  "description": "",
+  "main": "command.js",
+  "dependencies": {
+    "chalk": "^3.0.0",
+    "commander": "^5.0.0",
+    "inquirer": "^7.1.0"
+  },
+  "author": "",
+  "license": "ISC"
+}
