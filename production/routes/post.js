@@ -19,24 +19,24 @@ try {
 
 AWS.config.update({
   accessKeyId: process.env.S3_ACCESS_KEY_ID,
-  secretAccessKey: process.env.S3_SECERT_ACCESS_KEY,
+  secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
   region: "ap-northeast-2",
 });
-
 const upload = multer({
   storage: multerS3({
     s3: new AWS.S3(),
-    bucket: "nodebird-example",
+    bucket: "nodebird1",
     key(req, file, cb) {
       cb(null, `original/${Date.now()}${path.basename(file.originalname)}`);
     },
   }),
   limits: { fileSize: 5 * 1024 * 1024 },
 });
-
 router.post("/img", isLoggedIn, upload.single("img"), (req, res) => {
   console.log(req.file);
-  res.json({ url: req.file.location });
+  const originalUrl = req.file.location;
+  const url = originalUrl.replace(/\/original\//, "/thumb/");
+  res.json({ url, originalUrl });
 });
 
 const upload2 = multer();
